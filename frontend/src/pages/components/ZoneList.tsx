@@ -31,7 +31,7 @@ const ZoneList: React.FC = () => {
     };
 
     const isValidDomain = (domain: string): boolean => {
-        const domainRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}\.?$/;
+        const domainRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}$/;
         return domainRegex.test(domain);
     };
 
@@ -118,7 +118,7 @@ const ZoneList: React.FC = () => {
                 <button onClick={handleAddZone}>Add Zone</button>
             </div>
             <button onClick={handleUpdateZones}>Update Zones</button>
-            <table style={{ borderCollapse: 'collapse', width: '80%', margin: '20px 0', border: '1px solid black' }}>
+            <table style={{ borderCollapse: 'collapse', width: '80%', margin: '20px 0', border: '1px solid black', tableLayout: 'fixed' }}>
                 <thead>
                     <tr>
                         <th style={{ textAlign: 'left', border: '1px solid black', padding: '8px' }}>Domain</th>
@@ -135,6 +135,7 @@ const ZoneList: React.FC = () => {
                                         type="text"
                                         value={editZone.domain}
                                         onChange={(e) => setEditZone({ ...editZone, domain: e.target.value })}
+                                        style={{ width: '100%' }}
                                     />
                                 ) : (
                                     zone.domain
@@ -146,6 +147,7 @@ const ZoneList: React.FC = () => {
                                         type="text"
                                         value={editZone.forward_addr}
                                         onChange={(e) => setEditZone({ ...editZone, forward_addr: e.target.value })}
+                                        style={{ width: '100%' }}
                                     />
                                 ) : (
                                     zone.forward_addr

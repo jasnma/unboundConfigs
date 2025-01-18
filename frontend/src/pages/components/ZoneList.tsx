@@ -31,7 +31,7 @@ const ZoneList: React.FC = () => {
     };
 
     const isValidDomain = (domain: string): boolean => {
-        const domainRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}$/;
+        const domainRegex = /^(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,11}\.?$/;
         return domainRegex.test(domain);
     };
 

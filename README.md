@@ -66,6 +66,7 @@ Nginx 配置文件位于 `nginx/unbound.conf`。
 ### 自定义 DNS 区域
 
 可以通过前端应用程序管理 DNS 区域。后端 API 处理区域的 CRUD 操作。自定义 DNS 区域配置文件位于 `/etc/unbound/unbound.conf.d/custom.conf`。
+可以在‘/etc/unbound/unbound.conf’ 中include它，来应用当前设置
 
 ## 许可证
 

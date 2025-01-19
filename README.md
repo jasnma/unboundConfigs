@@ -1,72 +1,98 @@
-# Unbound Configs 项目
+# Unbound Configs
 
-该项目是一个全栈应用程序，使用 React 前端和 Django 后端来管理 DNS 区域。它还包括一个 Nginx 配置文件，用于服务前端和代理 API 请求到后端。
+## 项目简介
 
-## 项目结构
+该项目用于管理 Unbound DNS 服务器的配置，包括自定义转发区域和本地域名。
 
-- **frontend**: 包含 React 应用程序。
-- **backend**: 包含 Django 应用程序。
-- **nginx**: 包含 Nginx 配置文件。
-- **install.sh**: 用于设置和部署项目的 Shell 脚本。
+## 功能
 
-## 设置说明
+### 自定义转发区域
 
-### 前提条件
+- 列出所有自定义转发区域
+- 添加新的转发区域
+- 编辑现有的转发区域
+- 删除转发区域
 
-- Node.js 和 Yarn
-- Python 3 和 pip
-- Nginx
-- Git
+### 本地域名
 
-### 安装
+- 列出所有本地域名
+- 添加新的本地域名
+- 编辑现有的本地域名
+- 删除本地域名
 
-1. 克隆仓库：
+### 系统管理
+
+- 启动 Unbound 服务
+- 停止 Unbound 服务
+
+## API 端点
+
+### 自定义转发区域
+
+- `GET /api/zones/` - 列出所有自定义转发区域
+- `POST /api/zones/update/` - 更新自定义转发区域
+
+### 本地域名
+
+- `GET /api/local-data/` - 列出所有本地域名
+- `POST /api/local-data/update/` - 更新本地域名
+
+### 系统管理
+
+- `POST /api/unbound/start/` - 启动 Unbound 服务
+- `POST /api/unbound/stop/` - 停止 Unbound 服务
+
+## 本地域名功能描述
+
+本地域名功能允许用户管理 Unbound DNS 服务器中的本地域名记录。用户可以通过前端界面添加、编辑和删除本地域名记录。
+
+### 本地域名数据结构
+
+每个本地域名记录包含以下字段：
+
+- `domain` - 域名
+- `type` - 记录类型（例如：A、AAAA、CNAME 等）
+- `data` - 记录数据（例如：IP 地址）
+
+### 示例
+
+以下是一个示例的本地域名记录：
+
+```plaintext
+local-data: "example.com. IN A 192.0.2.1"
+```
+
+在前端界面中，用户可以通过输入域名、记录类型和记录数据来添加新的本地域名记录。
+
+## 安装和运行
+
+### 后端
+
+1. 安装依赖项：
     ```bash
-    git clone <repository-url>
-    cd unboundConfigs
+    pip install -r requirements.txt
     ```
 
-2. 运行安装脚本：
+2. 运行 Django 开发服务器：
     ```bash
-    ./install.sh
+    python manage.py runserver
     ```
 
 ### 前端
 
-前端是使用 Create React App 创建的 React 应用程序。
+1. 安装依赖项：
+    ```bash
+    yarn install
+    ```
 
-#### 可用脚本
+2. 运行 React 开发服务器：
+    ```bash
+    yarn start
+    ```
 
-- `yarn start`: 在开发模式下运行应用程序。
-- `yarn test`: 启动测试运行器。
-- `yarn build`: 为生产环境构建应用程序。
-- `yarn eject`: 弹出配置文件。
+## 贡献
 
-### 后端
-
-后端是一个 Django 应用程序。
-
-#### 关键文件
-
-- `settings.py`: Django 设置文件。
-- `requirements.txt`: Python 依赖项。
-
-### Nginx
-
-Nginx 配置文件位于 `nginx/unbound.conf`。
-
-### 部署
-
-`install.sh` 脚本处理部署过程，包括设置 Python 虚拟环境、安装依赖项、迁移数据库、收集静态文件、构建前端和配置 Nginx。
-
-### Systemd 服务
-
-创建一个 systemd 服务来管理 Django 应用程序。服务文件位于 `/etc/systemd/system/unboundConfigs.service`。
-
-### 自定义 DNS 区域
-
-可以通过前端应用程序管理 DNS 区域。后端 API 处理区域的 CRUD 操作。自定义 DNS 区域配置文件位于 `/etc/unbound/unbound.conf.d/custom.conf`。
-可以在‘/etc/unbound/unbound.conf’ 中include它，来应用当前设置
+欢迎贡献代码！请提交 Pull Request 或报告问题。
 
 ## 许可证
 

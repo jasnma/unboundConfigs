@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# 安装依赖
-sudo apt update
-sudo apt install -y nginx python3-pip python3-venv git
-
 # 获取脚本所在的目录
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
 PROJECT_DIR=$SCRIPT_DIR

@@ -121,6 +121,16 @@ def stop_unbound_service():
     except FileNotFoundError:
         return False, "systemctl command not found"
 
+# Helper to check Unbound service status
+def check_unbound_status():
+    try:
+        result = subprocess.run(["systemctl", "is-active", "unbound"], capture_output=True, text=True)
+        if result.returncode == 0:
+            return "active"
+        return "inactive"
+    except FileNotFoundError:
+        return "systemctl command not found"
+
 @api_view(['GET'])
 def list_zones(request):
     zones = parse_config()
@@ -212,3 +222,10 @@ def stop_unbound(request):
     if not success:
         return Response({"error": message}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     return Response({"message": "Unbound service stopped successfully"}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def unbound_status(request):
+    service_status = check_unbound_status()
+    if "Error" in service_status or "not found" in service_status:
+        return Response({"status": service_status}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    return Response({"status": service_status}, status=status.HTTP_200_OK)

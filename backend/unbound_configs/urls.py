@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/local-data/update/', views.update_local_data, name='update_local_data'),
     path('api/unbound/start/', views.start_unbound, name='start_unbound'),
     path('api/unbound/stop/', views.stop_unbound, name='stop_unbound'),
+    path('api/unbound/status/', views.unbound_status, name='unbound_status'),
 ]
